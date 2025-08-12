@@ -1,6 +1,5 @@
 // src/pages/api/placeBet.js
 import { ethers } from 'ethers';
-import { BetGameABI } from '../../../utils/contractABI';
 
 const RPC = process.env.MONAD_RPC || process.env.NEXT_PUBLIC_MONAD_RPC;
 const CONTRACT = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
