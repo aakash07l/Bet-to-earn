@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 import { ethers } from 'ethers';
-import { BetGameABI } from '../utils/contractABI';
 
 export default function BetUI({ contractAddress, refreshBets }) {
   const { data: signer } = useSigner();
