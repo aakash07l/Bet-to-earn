@@ -9,9 +9,11 @@ import { monadTestnet } from '../utils/monadConfig';
 import { createPublicClient, http } from 'viem';
 import { useState } from 'react';
 
+const rpcUrl = process.env.NEXT_PUBLIC_MONAD_RPC || 'https://rpc.testnet.monad.xyz';
+
 const wagmiConfig = createConfig({
   autoConnect: true,
-  publicClient: createPublicClient({ chain: monadTestnet, transport: http(process.env.NEXT_PUBLIC_MONAD_RPC) })
+  publicClient: createPublicClient({ chain: monadTestnet, transport: http(rpcUrl) })
 });
 
 export default function HomePage() {
