@@ -4,22 +4,10 @@ import WalletConnect from '../components/WalletConnect';
 import BetUI from '../components/BetUI';
 import ResultModal from '../components/ResultModal';
 import useBetting from '../hooks/useBetting';
-import { createConfig, WagmiConfig, configureChains } from 'wagmi';
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-import { publicProvider } from 'wagmi/providers/public';
+import { createConfig, WagmiConfig } from 'wagmi';
 import { monadTestnet } from '../utils/monadConfig';
 import { createPublicClient, http } from 'viem';
 import { useState } from 'react';
-
-const chainsConfig = configureChains(
-  [monadTestnet],
-  [
-    jsonRpcProvider({
-      rpc: (chain) => ({ http: process.env.NEXT_PUBLIC_MONAD_RPC })
-    }),
-    publicProvider()
-  ]
-);
 
 const wagmiConfig = createConfig({
   autoConnect: true,

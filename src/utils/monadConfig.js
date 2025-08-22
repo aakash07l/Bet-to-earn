@@ -6,7 +6,8 @@ export const monadTestnet = defineChain({
   network: 'monad-testnet',
   nativeCurrency: { name: 'tMON', symbol: 'tMON', decimals: 18 },
   rpcUrls: {
-    default: { http: [process.env.NEXT_PUBLIC_MONAD_RPC || 'https://rpc.testnet.monad.xyz'] }
+    default: { http: [process.env.NEXT_PUBLIC_MONAD_RPC || 'https://rpc.testnet.monad.xyz'] },
+    public: { http: [process.env.NEXT_PUBLIC_MONAD_RPC || 'https://rpc.testnet.monad.xyz'] }
   },
   testnet: true
 });

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSigner } from 'wagmi';
+import { useWalletClient } from 'wagmi';
 import { ethers } from 'ethers';
+import { BetGameABI } from '../utils/abi';
 
 export default function BetUI({ contractAddress, refreshBets }) {
-  const { data: signer } = useSigner();
+  const { data: walletClient } = useWalletClient();
   const [choice, setChoice] = useState('0'); // 0 = Heads, 1 = Tails
   const [amount, setAmount] = useState('0.001');
   const [status, setStatus] = useState('');
@@ -11,11 +12,12 @@ export default function BetUI({ contractAddress, refreshBets }) {
   useEffect(() => {}, []);
 
   const placeBetOnChain = async () => {
-    if (!signer) return setStatus('Connect wallet');
+    if (!walletClient) return setStatus('Connect wallet');
     try {
       setStatus('Sending transaction — please confirm in wallet...');
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
       const contract = new ethers.Contract(contractAddress, BetGameABI, signer);
-      // send tx: placeBet(uint8 choice), payable
       const tx = await contract.placeBet(choice, { value: ethers.parseUnits(amount, 18) });
       setStatus('Tx sent. Waiting for confirmation...');
       await tx.wait();
